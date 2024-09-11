@@ -1,4 +1,4 @@
-# jsramverk
+jsramverk
 -----------------------------
 
 ## Week 1 & 2: Specification
