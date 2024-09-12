@@ -62,6 +62,9 @@ node app.mjs
 #### 8. Open browser
 Open browser and go to `localhost:3000` to check out the app.
 
+### Frontend framework
+I've decided to go with React as my frontend framwork. It's developed by META/Facebook with a big community. React has been the most popular frontend framework for a long time. There is also React Native which makes it easier to develop mobile apps. With this in mind I believe it's the framework to go for.
+
 -----------------------------
 
 ## Week 3-5: Refactoring

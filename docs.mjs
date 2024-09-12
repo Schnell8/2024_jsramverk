@@ -5,7 +5,9 @@ const docs = {
         let db = await openDb();
 
         try {
-            return await db.all('SELECT rowid as id, * FROM documents');
+            return await db.all(
+                'SELECT rowid as id, * FROM documents'
+            );
         } catch (e) {
             console.error(e);
 
@@ -19,7 +21,10 @@ const docs = {
         let db = await openDb();
 
         try {
-            return await db.get('SELECT * FROM documents WHERE rowid=?', id);
+            return await db.get(
+                'SELECT rowid as id, * FROM documents WHERE rowid=?', 
+                id
+            );
         } catch (e) {
             console.error(e);
 
@@ -38,8 +43,29 @@ const docs = {
                 body.title,
                 body.content,
             );
+
         } catch (e) {
             console.error(e);
+        } finally {
+            await db.close();
+        }
+    },
+
+    editOne: async function (body) {
+        let db = await openDb();
+
+        try {
+            await db.run(
+                'UPDATE documents SET title=?, content=? WHERE rowid=?',
+                body.title,
+                body.content,
+                body.id,
+            );
+
+            return true;
+        } catch (e) {
+            console.error(e);
+            return false;
         } finally {
             await db.close();
         }

@@ -27,23 +27,41 @@ if (process.env.NODE_ENV !== 'test') {
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.post("/", async (req, res) => {
-    const result = await documents.addOne(req.body);
-
-    return res.redirect(`/${result.lastID}`);
-});
-
-app.get('/:id', async (req, res) => {
+app.get('/', async (req, res) => {
     return res.render(
-        "doc",
-        { doc: await documents.getOne(req.params.id) }
+        "index", {
+            docs: await documents.getAll()
+        }
     );
 });
 
-app.get('/', async (req, res) => {
-    return res.render("index", { docs: await documents.getAll() });
+app.get('/add', async (req, res) => {
+    return res.render(
+        "add", {
+        }
+    );
+});
+
+app.post("/add", async (req, res) => {
+    await documents.addOne(req.body);
+
+    return res.redirect(`/`);
+});
+
+app.get('/edit/:id', async (req, res) => {
+    return res.render(
+        "edit", {
+            doc: await documents.getOne(req.params.id)
+        }
+    );
+});
+
+app.post("/edit", async (req, res) => {
+    const result = await documents.editOne(req.body);
+
+    return res.redirect(`/edit/${req.body.id}?=${result ? 'success' : 'error'}`);
 });
 
 app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
+    console.log(`Example app listening on port ${port}`)
 });
