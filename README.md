@@ -14,52 +14,42 @@ It worked perfectly, 0 vulnerabilities identified.
 ### Steps to make the app work
 Use the steps below to make the app work
 
-#### 1. API Key from Trafikverket
-Go to [Trafikverket](https://data.trafikverket.se/get-started) to register an account. When done obtain your API key.
-
-#### 2. Create .env file
+#### 1. Create .env file
 Create a `.env` file in your directory looking like this:
 
 ```
-TRAFIKVERKET_API_KEY=<your-api-key>
+PORT=<your-port>
 ```
 
-#### 3. Install dotenv
+#### 2. Install dotenv
 Run command in terminal:
 
 ```
 npm install dotenv
 ```
 
-#### 4. Set port
-Locate file `app.mjs` in directory and change port to this:
-
-```
-const port = process.env.PORT || 3000;
-```
-
-#### 5. Init database
+#### 3. Init database
 Run command in terminal:
 
 ```
 bash ./db/reset_db.bash
 ```
 
-#### 6. Create first document
+#### 4. Create first document
 Run command in terminal:
 
 ```
 echo "INSERT INTO documents (title, content) VALUES ('Initial title', 'Initial content')" | sqlite3 db/docs.sqlite
 ```
 
-#### 7. Run app
+#### 5. Run app
 Run command in terminal:
 
 ```
 node app.mjs
 ```
 
-#### 8. Open browser
+#### 6. Open browser
 Open browser and go to `localhost:3000` to check out the app.
 
 ### Frontend framework
